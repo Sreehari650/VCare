@@ -9,13 +9,14 @@ interface TeamGridProps {
   team: TeamMember[];
   limit?: number;
   showHeading?: boolean;
+  transparent?: boolean;
 }
 
-const TeamGrid: React.FC<TeamGridProps> = ({ team, limit, showHeading = true }) => {
+const TeamGrid: React.FC<TeamGridProps> = ({ team, limit, showHeading = true, transparent }) => {
   const displayTeam = limit ? team.slice(0, limit) : team;
 
   return (
-    <div className="w-full bg-white dark:bg-card-dark py-20 md:py-32 rounded-[3rem] shadow-inner">
+    <div className={`w-full py-20 md:py-32 rounded-[3rem] ${transparent ? 'bg-white/60 dark:bg-card-dark/40 backdrop-blur-lg border border-white/20' : 'bg-white dark:bg-card-dark shadow-inner'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-10">
         {showHeading && (
            <div className="text-center mb-20">
@@ -47,7 +48,7 @@ const TeamGrid: React.FC<TeamGridProps> = ({ team, limit, showHeading = true }) 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05, duration: 0.4 }}
-              className="flex flex-col items-center text-center group bg-light dark:bg-background-dark p-6 rounded-[2rem] hover:bg-secondary/10 transition-colors"
+              className="flex flex-col items-center text-center group bg-light/80 dark:bg-background-dark/80 backdrop-blur-md p-6 rounded-[2rem] hover:bg-secondary/20 transition-colors"
             >
               <div 
                 className="w-36 h-36 rounded-full mb-6 bg-cover bg-center border-4 border-white dark:border-gray-700 shadow-lg group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300 ease-out"

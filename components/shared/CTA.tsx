@@ -6,10 +6,7 @@ interface CTAProps {
   title?: string;
   subtitle?: string;
   buttonText?: string;
-  bgColor?: string;
-  textColor?: string;
-  iconColor?: string;
-  iconBgColor?: string;
+  transparent?: boolean;
 }
 
 // Workaround for framer-motion type issues
@@ -19,11 +16,12 @@ const CTA: React.FC<CTAProps> = ({
   title = "Ready to prioritize your mental health?",
   subtitle = "Book a consultation today and take the first step towards a clearer, calmer mind.",
   buttonText = "Book Appointment",
+  transparent
 }) => {
   const { openModal } = useBooking();
 
   return (
-    <div className="w-full py-20 px-4 bg-light dark:bg-dark">
+    <div className={`w-full py-20 px-4 ${transparent ? '' : 'bg-light dark:bg-dark'}`}>
       <M.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}

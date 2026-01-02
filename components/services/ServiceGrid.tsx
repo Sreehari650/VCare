@@ -10,13 +10,14 @@ interface ServiceGridProps {
   services: Service[];
   limit?: number;
   showHeading?: boolean;
+  transparent?: boolean;
 }
 
-const ServiceGrid: React.FC<ServiceGridProps> = ({ services, limit, showHeading = true }) => {
+const ServiceGrid: React.FC<ServiceGridProps> = ({ services, limit, showHeading = true, transparent }) => {
   const displayServices = limit ? services.slice(0, limit) : services;
 
   return (
-    <div className="w-full bg-light dark:bg-dark py-20 md:py-32">
+    <div className={`w-full py-20 md:py-32 ${transparent ? '' : 'bg-light dark:bg-dark'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-10">
         {showHeading && (
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
@@ -39,7 +40,7 @@ const ServiceGrid: React.FC<ServiceGridProps> = ({ services, limit, showHeading 
                 Comprehensive mental health support designed for every stage of your journey.
               </M.p>
             </div>
-            <Link to="/services" className="hidden md:flex px-6 py-3 rounded-full border-2 border-text-main dark:border-white font-bold hover:bg-text-main hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+            <Link to="/services" className="hidden md:flex px-6 py-3 rounded-full border-2 border-text-main dark:border-white font-bold hover:bg-text-main hover:text-white dark:hover:bg-white dark:hover:text-black transition-all bg-white/20 backdrop-blur-sm">
               View All Services
             </Link>
           </div>
@@ -53,7 +54,7 @@ const ServiceGrid: React.FC<ServiceGridProps> = ({ services, limit, showHeading 
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05, duration: 0.5 }}
-              className="group relative overflow-hidden rounded-[2rem] bg-white dark:bg-card-dark p-8 border border-gray-100 dark:border-gray-800 hover:border-primary/50 transition-all hover:shadow-neo duration-300"
+              className="group relative overflow-hidden rounded-[2rem] bg-white/90 dark:bg-card-dark/80 backdrop-blur-md p-8 border border-gray-100 dark:border-gray-800 hover:border-primary/50 transition-all hover:shadow-neo duration-300"
             >
               <div className="mb-6 h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 group-hover:rotate-6 transition-transform">
                 <span className="material-symbols-outlined text-3xl">{service.icon}</span>

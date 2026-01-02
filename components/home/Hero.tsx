@@ -6,14 +6,22 @@ import { useBooking } from '../../contexts/BookingContext';
 // Workaround for framer-motion type issues
 const M = motion as any;
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  transparent?: boolean;
+}
+
+const Hero: React.FC<HeroProps> = ({ transparent }) => {
   const { openModal } = useBooking();
 
   return (
-    <div className="w-full bg-light dark:bg-dark relative overflow-hidden pt-32 pb-20 px-4">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0"></div>
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 z-0"></div>
+    <div className={`w-full relative overflow-hidden pt-32 pb-20 px-4 ${transparent ? '' : 'bg-light dark:bg-dark'}`}>
+      {/* Background Decor - Only show if not transparent */}
+      {!transparent && (
+        <>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-0"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 z-0"></div>
+        </>
+      )}
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
@@ -25,7 +33,7 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="inline-block"
               >
-                 <span className="px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-bold tracking-wider uppercase mb-4 inline-block">
+                 <span className="px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-bold tracking-wider uppercase mb-4 inline-block backdrop-blur-sm">
                   Mental Wellness Reimagined
                  </span>
               </M.div>
@@ -59,7 +67,7 @@ const Hero: React.FC = () => {
               >
                 Start Journey
               </button>
-              <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-2xl h-14 px-8 bg-white dark:bg-card-dark border-2 border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors text-text-main dark:text-white text-lg font-bold">
+              <button className="flex min-w-[160px] cursor-pointer items-center justify-center rounded-2xl h-14 px-8 bg-white/50 dark:bg-card-dark/50 border-2 border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors text-text-main dark:text-white text-lg font-bold backdrop-blur-sm">
                 Learn More
               </button>
             </M.div>
@@ -102,10 +110,10 @@ const Hero: React.FC = () => {
           >
             <div className="relative w-full aspect-square max-w-[500px] lg:max-w-[550px]">
                {/* Decorative blobs behind image */}
-               <div className="absolute -top-10 -right-10 w-32 h-32 bg-secondary rounded-full border-2 border-black dark:border-white z-20 flex items-center justify-center">
+               <div className="absolute -top-10 -right-10 w-32 h-32 bg-secondary rounded-full border-2 border-black dark:border-white z-20 flex items-center justify-center shadow-lg">
                   <span className="text-3xl">🌱</span>
                </div>
-               <div className="absolute -bottom-5 -left-5 w-24 h-24 bg-accent rounded-full border-2 border-black dark:border-white z-20 flex items-center justify-center">
+               <div className="absolute -bottom-5 -left-5 w-24 h-24 bg-accent rounded-full border-2 border-black dark:border-white z-20 flex items-center justify-center shadow-lg">
                   <span className="text-3xl">🧠</span>
                </div>
 

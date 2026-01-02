@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
       whileInView="visible"
       viewport={{ once: true }}
       variants={containerVariants}
-      className="bg-white dark:bg-card-dark pt-20 pb-10 border-t-2 border-gray-100 dark:border-gray-800"
+      className="bg-white dark:bg-card-dark pt-20 pb-10 border-t-2 border-gray-100 dark:border-gray-800 relative z-10"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-10">
         <div className="flex flex-col lg:flex-row justify-between gap-16 mb-20">

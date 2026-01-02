@@ -6,15 +6,21 @@ import TeamGrid from '../components/team/TeamGrid.tsx';
 import CTA from '../components/shared/CTA.tsx';
 import { SERVICES, TEAM } from '../constants';
 import PageTransition from '../components/shared/PageTransition.tsx';
+import NeuralNetworkBackground from '../components/home/NeuralNetworkBackground.tsx';
 
 const Home: React.FC = () => {
   return (
-    <PageTransition className="flex flex-col min-h-screen">
-      <Hero />
-      <Philosophy />
-      <ServiceGrid services={SERVICES} limit={4} />
-      <TeamGrid team={TEAM} limit={4} />
-      <CTA />
+    <PageTransition className="flex flex-col min-h-screen relative">
+      {/* Canvas Background */}
+      <NeuralNetworkBackground />
+
+      <div className="relative z-10">
+        <Hero transparent />
+        <Philosophy transparent />
+        <ServiceGrid services={SERVICES} limit={4} transparent />
+        <TeamGrid team={TEAM} limit={4} transparent />
+        <CTA transparent />
+      </div>
     </PageTransition>
   );
 };

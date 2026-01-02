@@ -4,9 +4,13 @@ import { motion } from 'framer-motion';
 // Workaround for framer-motion type issues
 const M = motion as any;
 
-const Philosophy: React.FC = () => {
+interface PhilosophyProps {
+  transparent?: boolean;
+}
+
+const Philosophy: React.FC<PhilosophyProps> = ({ transparent }) => {
   return (
-    <div className="w-full bg-white dark:bg-card-dark py-20 md:py-32 rounded-t-[3rem] md:rounded-t-[4rem] -mt-10 relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+    <div className={`w-full py-20 md:py-32 rounded-t-[3rem] md:rounded-t-[4rem] -mt-10 relative z-20 ${transparent ? 'bg-white/80 dark:bg-card-dark/60 backdrop-blur-lg border-t border-white/20' : 'bg-white dark:bg-card-dark shadow-[0_-10px_40px_rgba(0,0,0,0.05)]'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-10 flex flex-col gap-16">
         <div className="flex flex-col gap-6 text-center items-center">
           <M.div 
@@ -49,7 +53,7 @@ const Philosophy: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * idx, duration: 0.5 }}
-              className="flex flex-col gap-6 p-8 rounded-[2.5rem] bg-gray-50 dark:bg-background-dark border border-gray-100 dark:border-gray-800 hover:shadow-neo hover:-translate-y-2 transition-all duration-300"
+              className="flex flex-col gap-6 p-8 rounded-[2.5rem] bg-gray-50/80 dark:bg-background-dark/80 backdrop-blur-md border border-gray-100 dark:border-gray-800 hover:shadow-neo hover:-translate-y-2 transition-all duration-300"
             >
               <div className={`w-16 h-16 rounded-2xl ${item.color} flex items-center justify-center`}>
                 <span className="material-symbols-outlined text-4xl">{item.icon}</span>
