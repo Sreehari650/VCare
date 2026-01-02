@@ -6,7 +6,13 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import TeamPage from './pages/TeamPage';
+import AboutPage from './pages/AboutPage';
 import FAQPage from './pages/FAQPage';
+import ContactPage from './pages/ContactPage';
+import CareersPage from './pages/CareersPage';
+import InsurancePage from './pages/InsurancePage';
+import EmergencyPage from './pages/EmergencyPage';
+import LegalPage from './pages/LegalPage';
 import { BookingProvider } from './contexts/BookingContext';
 import BookingModal from './components/shared/BookingModal';
 
@@ -17,9 +23,23 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/faq" element={<FAQPage />} />
+        
+        {/* New Pages */}
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/insurance" element={<InsurancePage />} />
+        <Route path="/emergency" element={<EmergencyPage />} />
+        
+        {/* Legal Pages */}
+        <Route path="/privacy" element={<LegalPage type="privacy" />} />
+        <Route path="/terms" element={<LegalPage type="terms" />} />
+        <Route path="/cookies" element={<LegalPage type="cookies" />} />
+        <Route path="/portal" element={<LegalPage type="portal" />} />
+
         <Route path="*" element={<Home />} />
       </Routes>
     </AnimatePresence>

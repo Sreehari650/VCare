@@ -73,10 +73,10 @@ const Footer: React.FC = () => {
             <M.div variants={itemVariants} className="flex flex-col gap-6">
               <h4 className="font-display font-bold text-text-main dark:text-white text-xl">Clinic</h4>
               <div className="flex flex-col gap-3">
-                <Link to="/team" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">About Us</Link>
+                <Link to="/about" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">About Us</Link>
                 <Link to="/team" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Our Team</Link>
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Careers</a>
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Contact</a>
+                <Link to="/careers" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Careers</Link>
+                <Link to="/contact" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Contact</Link>
               </div>
             </M.div>
 
@@ -84,10 +84,13 @@ const Footer: React.FC = () => {
             <M.div variants={itemVariants} className="flex flex-col gap-6">
               <h4 className="font-display font-bold text-text-main dark:text-white text-xl">Support</h4>
               <div className="flex flex-col gap-3">
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">FAQ</a>
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Insurance</a>
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Patient Portal</a>
-                <a href="#" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Emergency</a>
+                <Link to="/faq" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">FAQ</Link>
+                <Link to="/insurance" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Insurance</Link>
+                <Link to="/portal" className="text-text-muted dark:text-gray-400 hover:text-primary font-medium transition-colors text-base">Patient Portal</Link>
+                <Link to="/emergency" className="text-red-500 hover:text-red-600 font-bold transition-colors text-base flex items-center gap-2">
+                  Emergency
+                  <span className="material-symbols-outlined text-sm">warning</span>
+                </Link>
               </div>
             </M.div>
 
@@ -123,9 +126,9 @@ const Footer: React.FC = () => {
              </p>
           </div>
           <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-            <a href="#" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Cookie Policy</a>
+            <Link to="/privacy" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Terms of Service</Link>
+            <Link to="/cookies" className="text-sm font-bold text-text-main dark:text-gray-400 hover:text-primary transition-colors">Cookie Policy</Link>
           </div>
         </M.div>
       </div>
