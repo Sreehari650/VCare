@@ -37,9 +37,10 @@ const BookingModal: React.FC = () => {
               </div>
               <button 
                 onClick={closeModal}
+                aria-label="Close modal"
                 className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
               >
-                <span className="material-symbols-outlined">close</span>
+                <span className="material-symbols-outlined" aria-hidden="true">close</span>
               </button>
             </div>
 
