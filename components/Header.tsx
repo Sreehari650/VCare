@@ -40,10 +40,10 @@ const Header: React.FC = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex flex-1 justify-end gap-2 items-center">
             <div className="flex items-center gap-1 mr-4">
-              <Link to="/" className={`text-sm tracking-tight ${isActive('/')}`}>Home</Link>
-              <Link to="/services" className={`text-sm tracking-tight ${isActive('/services')}`}>Services</Link>
-              <Link to="/team" className={`text-sm tracking-tight ${isActive('/team')}`}>Team</Link>
-              <Link to="/faq" className={`text-sm tracking-tight ${isActive('/faq')}`}>FAQ</Link>
+              <Link to="/" aria-current={location.pathname === '/' ? 'page' : undefined} className={`text-sm tracking-tight ${isActive('/')}`}>Home</Link>
+              <Link to="/services" aria-current={location.pathname === '/services' ? 'page' : undefined} className={`text-sm tracking-tight ${isActive('/services')}`}>Services</Link>
+              <Link to="/team" aria-current={location.pathname === '/team' ? 'page' : undefined} className={`text-sm tracking-tight ${isActive('/team')}`}>Team</Link>
+              <Link to="/faq" aria-current={location.pathname === '/faq' ? 'page' : undefined} className={`text-sm tracking-tight ${isActive('/faq')}`}>FAQ</Link>
             </div>
             <M.button 
               whileHover={{ scale: 1.05 }}
@@ -68,11 +68,14 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="md:hidden text-text-main dark:text-white flex items-center" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <div className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
-              <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
-            </div>
-          </div>
+          <button
+            className="md:hidden text-text-main dark:text-white flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className="material-symbols-outlined text-2xl" aria-hidden="true">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+          </button>
         </div>
       </div>
 
@@ -86,10 +89,10 @@ const Header: React.FC = () => {
             className="md:hidden absolute top-20 left-4 right-4 bg-white dark:bg-card-dark rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-800 pointer-events-auto"
           >
             <div className="p-6 flex flex-col gap-4">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Home</Link>
-              <Link to="/services" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Services</Link>
-              <Link to="/team" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Team</Link>
-              <Link to="/faq" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">FAQ</Link>
+              <Link to="/" aria-current={location.pathname === '/' ? 'page' : undefined} onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Home</Link>
+              <Link to="/services" aria-current={location.pathname === '/services' ? 'page' : undefined} onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Services</Link>
+              <Link to="/team" aria-current={location.pathname === '/team' ? 'page' : undefined} onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">Team</Link>
+              <Link to="/faq" aria-current={location.pathname === '/faq' ? 'page' : undefined} onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold text-text-main dark:text-white">FAQ</Link>
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
