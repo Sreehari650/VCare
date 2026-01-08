@@ -68,11 +68,16 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="md:hidden text-text-main dark:text-white flex items-center" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <div className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
-              <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
-            </div>
-          </div>
+          <button
+            className="md:hidden text-text-main dark:text-white flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+          </button>
         </div>
       </div>
 
@@ -80,6 +85,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <M.div 
+            id="mobile-menu"
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}

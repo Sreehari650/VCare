@@ -23,6 +23,9 @@ const BookingModal: React.FC = () => {
 
           {/* Modal Content */}
           <M.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -32,11 +35,12 @@ const BookingModal: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-8 pb-0">
               <div>
-                <h3 className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
+                <h3 id="modal-title" className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
                 <p className="text-sm text-text-muted dark:text-gray-400 mt-1">We'll get back to you within 24 hours.</p>
               </div>
               <button 
                 onClick={closeModal}
+                aria-label="Close modal"
                 className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
               >
                 <span className="material-symbols-outlined">close</span>
