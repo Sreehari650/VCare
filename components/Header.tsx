@@ -17,6 +17,10 @@ const Header: React.FC = () => {
       : "text-text-main dark:text-gray-200 hover:text-primary font-medium px-4 py-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full transition-all";
   };
 
+  const getAriaCurrent = (path: string) => {
+    return location.pathname === path ? "page" : undefined;
+  };
+
   return (
     <M.header 
       initial={{ y: -100 }}
@@ -27,7 +31,7 @@ const Header: React.FC = () => {
       <div className="glass-panel w-full max-w-5xl rounded-full shadow-lg pointer-events-auto transition-all duration-300">
         <div className="px-4 md:px-6 py-2 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group" aria-label="VCare Home">
             <div className="h-10 md:h-12 w-auto flex items-center justify-center">
               <img 
                 src="https://drive.google.com/thumbnail?id=1htZ5WjWfk1ifI8WbPOI7gCIAjhtwJ_he&sz=w500" 
@@ -40,10 +44,10 @@ const Header: React.FC = () => {
           {/* Desktop Nav */}
           <div className="hidden md:flex flex-1 justify-end gap-2 items-center">
             <div className="flex items-center gap-1 mr-4">
-              <Link to="/" className={`text-sm tracking-tight ${isActive('/')}`}>Home</Link>
-              <Link to="/services" className={`text-sm tracking-tight ${isActive('/services')}`}>Services</Link>
-              <Link to="/team" className={`text-sm tracking-tight ${isActive('/team')}`}>Team</Link>
-              <Link to="/faq" className={`text-sm tracking-tight ${isActive('/faq')}`}>FAQ</Link>
+              <Link to="/" className={`text-sm tracking-tight ${isActive('/')}`} aria-current={getAriaCurrent('/')}>Home</Link>
+              <Link to="/services" className={`text-sm tracking-tight ${isActive('/services')}`} aria-current={getAriaCurrent('/services')}>Services</Link>
+              <Link to="/team" className={`text-sm tracking-tight ${isActive('/team')}`} aria-current={getAriaCurrent('/team')}>Team</Link>
+              <Link to="/faq" className={`text-sm tracking-tight ${isActive('/faq')}`} aria-current={getAriaCurrent('/faq')}>FAQ</Link>
             </div>
             <M.button 
               whileHover={{ scale: 1.05 }}
@@ -68,11 +72,16 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="md:hidden text-text-main dark:text-white flex items-center" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <div className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer">
-              <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
-            </div>
-          </div>
+          <button
+            type="button"
+            className="md:hidden text-text-main dark:text-white flex items-center p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+          </button>
         </div>
       </div>
 
@@ -80,6 +89,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <M.div 
+            id="mobile-menu"
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
