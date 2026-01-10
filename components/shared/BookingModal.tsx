@@ -19,10 +19,15 @@ const BookingModal: React.FC = () => {
             exit={{ opacity: 0 }}
             onClick={closeModal}
             className="absolute inset-0 bg-black/60 backdrop-blur-md"
+            aria-hidden="true"
           />
 
           {/* Modal Content */}
           <M.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-desc"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -32,12 +37,13 @@ const BookingModal: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-8 pb-0">
               <div>
-                <h3 className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
-                <p className="text-sm text-text-muted dark:text-gray-400 mt-1">We'll get back to you within 24 hours.</p>
+                <h3 id="modal-title" className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
+                <p id="modal-desc" className="text-sm text-text-muted dark:text-gray-400 mt-1">We'll get back to you within 24 hours.</p>
               </div>
               <button 
                 onClick={closeModal}
-                className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
+                aria-label="Close modal"
+                className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
               >
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -47,8 +53,9 @@ const BookingModal: React.FC = () => {
             <div className="p-8 flex flex-col gap-5">
               
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Name</label>
+                <label htmlFor="booking-name" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Name</label>
                 <input 
+                  id="booking-name"
                   type="text" 
                   placeholder="Jane Doe"
                   className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white"
@@ -56,8 +63,9 @@ const BookingModal: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Email</label>
+                <label htmlFor="booking-email" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Email</label>
                 <input 
+                  id="booking-email"
                   type="email" 
                   placeholder="jane@example.com"
                   className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white"
@@ -65,9 +73,9 @@ const BookingModal: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                 <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Service Interest</label>
+                 <label htmlFor="booking-service" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Service Interest</label>
                  <div className="relative">
-                   <select className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white appearance-none">
+                   <select id="booking-service" className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white appearance-none">
                       <option>Individual Therapy</option>
                       <option>Couples Counselling</option>
                       <option>Child & Teen Therapy</option>
@@ -81,8 +89,9 @@ const BookingModal: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Message</label>
+                <label htmlFor="booking-message" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Message</label>
                 <textarea 
+                  id="booking-message"
                   rows={3}
                   placeholder="How can we help?"
                   className="w-full rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark p-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white resize-none"
