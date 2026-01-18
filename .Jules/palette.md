@@ -1,0 +1,3 @@
+## 2024-03-24 - [Semantic Form Pattern]
+**Learning:** This codebase tends to implement forms as collections of `input` fields within `div` containers rather than semantic `<form>` elements. This pattern breaks standard browser behaviors (submit on enter) and accessibility features (form association).
+**Action:** When working on modals or interactive inputs, check for the `<form>` wrapper and proper label-input association. Always wrap grouped inputs in a `<form>` tag and ensure labels are programmatically associated with inputs using `htmlFor`/`id` to ensure accessibility and expected user behavior.
