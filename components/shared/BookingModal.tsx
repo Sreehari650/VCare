@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBooking } from '../../contexts/BookingContext';
 
@@ -7,11 +7,28 @@ const M = motion as any;
 
 const BookingModal: React.FC = () => {
   const { isModalOpen, closeModal } = useBooking();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    // Simulate network request
+    setTimeout(() => {
+      setIsLoading(false);
+      closeModal();
+    }, 1500);
+  };
 
   return (
     <AnimatePresence>
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
           {/* Backdrop */}
           <M.div
             initial={{ opacity: 0 }}
@@ -32,11 +49,12 @@ const BookingModal: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-8 pb-0">
               <div>
-                <h3 className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
+                <h3 id="modal-title" className="text-2xl font-display font-bold text-text-main dark:text-white">Let's Connect</h3>
                 <p className="text-sm text-text-muted dark:text-gray-400 mt-1">We'll get back to you within 24 hours.</p>
               </div>
               <button 
                 onClick={closeModal}
+                aria-label="Close modal"
                 className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-red-100 hover:text-red-500 transition-colors"
               >
                 <span className="material-symbols-outlined">close</span>
@@ -44,30 +62,37 @@ const BookingModal: React.FC = () => {
             </div>
 
             {/* Form */}
-            <div className="p-8 flex flex-col gap-5">
+            <form onSubmit={handleSubmit} className="p-8 flex flex-col gap-5">
               
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Name</label>
+                <label htmlFor="booking-name" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Name</label>
                 <input 
+                  id="booking-name"
                   type="text" 
                   placeholder="Jane Doe"
+                  required
                   className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Email</label>
+                <label htmlFor="booking-email" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Email</label>
                 <input 
+                  id="booking-email"
                   type="email" 
                   placeholder="jane@example.com"
+                  required
                   className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                 <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Service Interest</label>
+                 <label htmlFor="booking-service" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Service Interest</label>
                  <div className="relative">
-                   <select className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white appearance-none">
+                   <select
+                      id="booking-service"
+                      className="w-full h-12 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark px-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white appearance-none"
+                   >
                       <option>Individual Therapy</option>
                       <option>Couples Counselling</option>
                       <option>Child & Teen Therapy</option>
@@ -81,18 +106,30 @@ const BookingModal: React.FC = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Message</label>
+                <label htmlFor="booking-message" className="text-xs font-bold text-text-main dark:text-gray-300 uppercase tracking-wider pl-1">Message</label>
                 <textarea 
+                  id="booking-message"
                   rows={3}
                   placeholder="How can we help?"
                   className="w-full rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-background-dark p-4 font-medium focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-card-dark transition-all dark:text-white resize-none"
                 ></textarea>
               </div>
 
-              <button className="mt-4 w-full h-14 bg-primary text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-none hover:translate-y-1 transition-all">
-                Submit Request
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="mt-4 w-full h-14 bg-primary text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-none hover:translate-y-1 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-xl flex items-center justify-center gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Sending...
+                  </>
+                ) : (
+                  "Submit Request"
+                )}
               </button>
-            </div>
+            </form>
           </M.div>
         </div>
       )}
